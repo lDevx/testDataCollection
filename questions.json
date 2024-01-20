@@ -1,0 +1,162 @@
+{
+  "questions": {
+    "cuisineData": [
+      {
+        "question": "What type of cuisine do you prefer to eat?",
+        "options": [
+          "Italian",
+          "Mexican",
+          "Asian",
+          "Mediterranean",
+          "Indian",
+          "American",
+          "Other"
+        ],
+        "key": "softFilter"
+      }
+    ],
+
+    "dietData": [
+      {
+        "question": "Select your dietary preference:",
+        "options": [
+          "Vegetarian",
+          "Vegan",
+          "Halal",
+          "Kosher",
+          "Pescatarian",
+          "Flexitarian",
+          "Other"
+        ],
+        "key": "dietPreference"
+      },
+      {
+        "question": "Do you follow any specific diet plan?",
+        "options": [
+          "Keto",
+          "Paleo",
+          "Mediterranean",
+          "Low-Carb",
+          "DASH",
+          "Intermittent Fasting",
+          "Other"
+        ],
+        "key": "dietPlan"
+      }
+    ],
+
+    "nutritionalGoals": [
+      {
+        "question": "What is your primary nutritional goal?",
+        "options": [
+          "Weight Loss",
+          "Muscle Gain",
+          "Maintenance",
+          "Improved Energy",
+          "Heart Health",
+          "Digestive Health",
+          "Other"
+        ],
+        "key": "nutritionalGoal"
+      },
+      {
+        "question": "Are there specific nutrients you want to focus on? (e.g., protein, fiber, vitamins)",
+        "options": [
+          "Protein",
+          "Fiber",
+          "Vitamins",
+          "Minerals",
+          "Omega-3 Fatty Acids",
+          "Other"
+        ],
+        "key": "nutrientFocus"
+      }
+    ],
+
+    "dietaryRestrictions": [
+      {
+        "question": "Do you have any dietary restrictions?",
+        "options": [
+          "None",
+          "Gluten-Free",
+          "Lactose-Free",
+          "Nut-Free",
+          "Soy-Free",
+          "Other"
+        ],
+        "key": "dietaryRestriction"
+      },
+      {
+        "question": "Any specific ingredients you want to avoid?",
+        "options": ["Dairy", "Gluten", "Nuts", "Soy", "Seafood", "Other"],
+        "key": "avoidIngredients"
+      }
+    ],
+
+    "foodIntolerances": [
+      {
+        "question": "Are you intolerant to any specific foods?",
+        "options": ["None", "Dairy", "Gluten", "Soy", "Lactose", "Other"],
+        "key": "foodIntolerance"
+      }
+    ],
+
+    "foodAllergens": [
+      {
+        "question": "Do you have any food allergies?",
+        "options": ["None", "Peanuts", "Shellfish", "Eggs", "Milk", "Other"],
+        "key": "foodAllergy"
+      }
+    ],
+
+    "userDetails": [
+      {
+        "question": "What is your gender?",
+        "options": ["Male", "Female", "Non-Binary", "Prefer not to say"],
+        "key": "gender"
+      },
+      {
+        "question": "How old are you?",
+        "options": [
+          "Under 18",
+          "18-24",
+          "25-34",
+          "35-44",
+          "45-54",
+          "55-64",
+          "65 or Above"
+        ],
+        "key": "age"
+      },
+      {
+        "question": "What is your occupation?",
+        "options": ["Student", "Professional", "Homemaker", "Retired", "Other"],
+        "key": "occupation"
+      }
+    ],
+
+    "activityData": [
+      {
+        "question": "How often do you exercise?",
+        "options": [
+          "Rarely or Never",
+          "1-2 times per week",
+          "3-4 times per week",
+          "5 or more times per week"
+        ],
+        "key": "exerciseFrequency"
+      },
+      {
+        "question": "What type of exercise do you enjoy the most?",
+        "options": [
+          "Cardio (running, cycling)",
+          "Strength training",
+          "Yoga/Pilates",
+          "Team sports",
+          "Other"
+        ],
+        "key": "favoriteExercise"
+      }
+    ]
+  }
+}

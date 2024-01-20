@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Questionnaire App</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        margin: 0;
+        padding: 0;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        height: 100vh;
+        background-color: #f8f8f8;
+      }
+
+      #question-container {
+        max-width: 400px;
+        width: 100%;
+        text-align: center;
+        padding: 20px;
+        border-radius: 8px;
+        background-color: #fff;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        margin-bottom: 20px;
+      }
+
+      #options-container {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+      }
+
+      label {
+        margin: 5px;
+      }
+
+      button {
+        padding: 10px 20px;
+        font-size: 16px;
+        margin: 5px;
+        cursor: pointer;
+        background-color: #f1ed07;
+        color: #000000;
+        border: none;
+        border-radius: 4px;
+      }
+
+      button:hover {
+        background-color: #eeff00;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="question-container">
+      <h2 id="section-title"></h2>
+      <p id="question-text"></p>
+      <div id="options-container"></div>
+      <br />
+      <button id="prev-button" onclick="prevQuestion()">Back</button>
+      <button id="next-button" onclick="nextQuestion()">Next</button>
+    </div>
+
+    <script>
+      const questions = {
+        questions: {
+          cuisineData: [
+            {
+              question: "What type of cuisine do you prefer to eat?",
+              options: [
+                "Italian",
+                "Mexican",
+                "Asian",
+                "Mediterranean",
+                "Indian",
+                "American",
+                "Other",
+              ],
+              key: "softFilter",
+            },
+          ],
+
+          dietData: [
+            {
+              question: "Select your dietary preference:",
+              options: [
+                "Vegetarian",
+                "Vegan",
+                "Halal",
+                "Kosher",
+                "Pescatarian",
+                "Flexitarian",
+                "Other",
+              ],
+              key: "dietPreference",
+            },
+            {
+              question: "Do you follow any specific diet plan?",
+              options: [
+                "Keto",
+                "Paleo",
+                "Mediterranean",
+                "Low-Carb",
+                "DASH",
+                "Intermittent Fasting",
+                "Other",
+              ],
+              key: "dietPlan",
+            },
+          ],
+
+          nutritionalGoals: [
+            {
+              question: "What is your primary nutritional goal?",
+              options: [
+                "Weight Loss",
+                "Muscle Gain",
+                "Maintenance",
+                "Improved Energy",
+                "Heart Health",
+                "Digestive Health",
+                "Other",
+              ],
+              key: "nutritionalGoal",
+            },
+            {
+              question:
+                "Are there specific nutrients you want to focus on? (e.g., protein, fiber, vitamins)",
+              options: [
+                "Protein",
+                "Fiber",
+                "Vitamins",
+                "Minerals",
+                "Omega-3 Fatty Acids",
+                "Other",
+              ],
+              key: "nutrientFocus",
+            },
+          ],
+
+          dietaryRestrictions: [
+            {
+              question: "Do you have any dietary restrictions?",
+              options: [
+                "None",
+                "Gluten-Free",
+                "Lactose-Free",
+                "Nut-Free",
+                "Soy-Free",
+                "Other",
+              ],
+              key: "dietaryRestriction",
+            },
+            {
+              question: "Any specific ingredients you want to avoid?",
+              options: ["Dairy", "Gluten", "Nuts", "Soy", "Seafood", "Other"],
+              key: "avoidIngredients",
+            },
+          ],
+
+          foodIntolerances: [
+            {
+              question: "Are you intolerant to any specific foods?",
+              options: ["None", "Dairy", "Gluten", "Soy", "Lactose", "Other"],
+              key: "foodIntolerance",
+            },
+          ],
+
+          foodAllergens: [
+            {
+              question: "Do you have any food allergies?",
+              options: [
+                "None",
+                "Peanuts",
+                "Shellfish",
+                "Eggs",
+                "Milk",
+                "Other",
+              ],
+              key: "foodAllergy",
+            },
+          ],
+
+          userDetails: [
+            {
+              question: "What is your gender?",
+              options: ["Male", "Female", "Non-Binary", "Prefer not to say"],
+              key: "gender",
+            },
+            {
+              question: "How old are you?",
+              options: [
+                "Under 18",
+                "18-24",
+                "25-34",
+                "35-44",
+                "45-54",
+                "55-64",
+                "65 or Above",
+              ],
+              key: "age",
+            },
+            {
+              question: "What is your occupation?",
+              options: [
+                "Student",
+                "Professional",
+                "Homemaker",
+                "Retired",
+                "Other",
+              ],
+              key: "occupation",
+            },
+          ],
+
+          activityData: [
+            {
+              question: "How often do you exercise?",
+              options: [
+                "Rarely or Never",
+                "1-2 times per week",
+                "3-4 times per week",
+                "5 or more times per week",
+              ],
+              key: "exerciseFrequency",
+            },
+            {
+              question: "What type of exercise do you enjoy the most?",
+              options: [
+                "Cardio (running, cycling)",
+                "Strength training",
+                "Yoga/Pilates",
+                "Team sports",
+                "Other",
+              ],
+              key: "favoriteExercise",
+            },
+          ],
+        },
+      };
+
+      let currentSection = 0;
+      let currentQuestion = 0;
+
+      const sectionKeys = Object.keys(questions.questions);
+
+      function showQuestion() {
+        const section = sectionKeys[currentSection];
+        const question = questions.questions[section][currentQuestion];
+        const sectionTitle = document.getElementById("section-title");
+        const questionText = document.getElementById("question-text");
+        const optionsContainer = document.getElementById("options-container");
+
+        sectionTitle.textContent = section;
+        questionText.textContent = question.question;
+
+        // Clear previous options
+        optionsContainer.innerHTML = "";
+
+        // Populate options with radio buttons
+        question.options.forEach((option) => {
+          const label = document.createElement("label");
+          const radio = document.createElement("input");
+          radio.type = "radio";
+          radio.name = question.key;
+          radio.value = option;
+          label.appendChild(radio);
+          label.appendChild(document.createTextNode(option));
+          optionsContainer.appendChild(label);
+        });
+      }
+
+      function nextQuestion() {
+        if (
+          currentQuestion <
+          questions.questions[sectionKeys[currentSection]].length - 1
+        ) {
+          currentQuestion++;
+        } else {
+          if (currentSection < sectionKeys.length - 1) {
+            currentSection++;
+            currentQuestion = 0;
+          } else {
+            alert("End of questionnaire. You can submit your responses now.");
+            return;
+          }
+        }
+        showQuestion();
+      }
+
+      function prevQuestion() {
+        if (currentQuestion > 0) {
+          currentQuestion--;
+        } else {
+          if (currentSection > 0) {
+            currentSection--;
+            currentQuestion =
+              questions.questions[sectionKeys[currentSection]].length - 1;
+          } else {
+            alert("This is the first question.");
+            return;
+          }
+        }
+        showQuestion();
+      }
+
+      // Initial question display
+      showQuestion();
+    </script>
+  </body>
+</html>
